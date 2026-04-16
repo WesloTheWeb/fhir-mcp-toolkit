@@ -4,6 +4,42 @@ An MCP (Model Context Protocol) server that exposes healthcare data tools to LLM
 
 Built as a learning project to understand how MCP servers work and how LLMs consume tools in the emerging agent ecosystem.
 
+## Learning Objectives
+
+Tracking what I'm aiming to understand by building this. Checked items are things I've actually done hands-on, not just read about.
+
+**MCP fundamentals**
+- [ ] Understand what MCP is and why it exists (vs. each app inventing its own tool plugin system)
+- [ ] Understand the difference between an MCP server, an MCP client, and the LLM itself
+- [ ] Understand stdio vs. SSE/HTTP transports and when to use each
+- [ ] Read and interpret JSON-RPC messages between client and server
+- [ ] Write a tool with `@mcp.tool()` and understand how type hints become the input schema
+- [ ] Understand why the docstring matters (it's the prompt the LLM reads to decide when to call the tool)
+
+**Running and debugging**
+- [ ] Run the server with the `mcp dev` inspector and invoke tools manually
+- [ ] Wire the server into Claude Desktop via `claude_desktop_config.json`
+- [ ] See a real end-to-end loop: chat message → LLM → tool call → FHIR response → chat reply
+- [ ] Debug a broken tool call by reading inspector output
+
+**FHIR basics**
+- [ ] Understand what FHIR is and why it's the standard for healthcare data exchange
+- [ ] Know the common resource types: Patient, Observation, MedicationRequest, Condition, Encounter
+- [ ] Query a FHIR server using search parameters (`?name=`, `?patient=`, `_count`, `_sort`)
+- [ ] Parse a FHIR Bundle response and extract useful fields
+
+**Python for a JS developer**
+- [ ] Set up a virtual environment with `venv` (the Python equivalent of `node_modules`)
+- [ ] Use `pip` and `requirements.txt` for dependency management
+- [ ] Use `httpx` to make HTTP calls (the `fetch`/`axios` equivalent)
+- [ ] Get comfortable with Python type hints and decorators
+
+**Stretch goals**
+- [ ] Switch transport from stdio to SSE so the server can be hosted remotely
+- [ ] Deploy the server to a real host (Railway, Fly.io, or similar)
+- [ ] Add basic auth/token handling for a non-public FHIR server
+- [ ] Write a second MCP server in TypeScript to compare the DX
+
 ## What is this?
 
 MCP is an open standard (introduced by Anthropic in late 2024) for connecting LLM applications to external tools and data sources. An MCP server exposes a set of tools; an MCP client (like Claude Desktop, Cursor, or Zed) gives an LLM access to those tools during a conversation.
@@ -70,4 +106,4 @@ Fully quit and reopen Claude Desktop. The `fhir-toolkit` tools should appear in 
 
 Try asking: *"Search for patients named Smith on the FHIR server."*
 
-## How it works# fhir-mcp-toolkit
+## How it works
